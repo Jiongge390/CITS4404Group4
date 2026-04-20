@@ -8,8 +8,8 @@
 |------|------------|
 | Bomin Liao  | 24331475        |
 | Weishan Li  | 24746589        |
-| TBD  | TBD        |
-| TBD  | TBD        |
+| Ziqi Meng  | 24645175        |
+| Chenxiao Jiang  | 24438869        |
 
 ## Deadlines
 - **Deliverable 1** (Part 1 Synopses): Friday 24 April 2026, 11:59pm AWST
