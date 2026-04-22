@@ -17,10 +17,10 @@ Each team member writes a synopsis (1–11 pages) on one nature-inspired optimis
 
 | File | Algorithm | Author |
 |------|-----------|--------|
-| `synopses/algorithm1.md` | TBD | TBD |
-| `synopses/algorithm2.md` | TBD | TBD |
-| `synopses/algorithm3.md` | TBD | TBD |
-| `synopses/algorithm4.md` | TBD | TBD |
+| `synopses/algorithm1.md` | Grey Wolf Optimizer | Bomin Liao |
+| `synopses/algorithm2.md` | Simulated Annealing | Weishan Li |
+| `synopses/algorithm3.md` | Weishan Li | Ziqi Meng |
+| `synopses/algorithm4.md` | Particle Swarm Optimization | Chenxiao Jiang |
 
 ## Comparison
 
