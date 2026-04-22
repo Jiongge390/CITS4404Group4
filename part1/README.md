@@ -19,7 +19,7 @@ Each team member writes a synopsis (1–11 pages) on one nature-inspired optimis
 |------|-----------|--------|
 | `synopses/algorithm1.md` | Grey Wolf Optimizer | Bomin Liao |
 | `synopses/algorithm2.md` | Simulated Annealing | Weishan Li |
-| `synopses/algorithm3.md` | Weishan Li | Ziqi Meng |
+| `synopses/algorithm3.md` | Differential Evolution | Ziqi Meng |
 | `synopses/algorithm4.md` | Particle Swarm Optimization | Chenxiao Jiang |
 
 ## Comparison
