@@ -8,6 +8,8 @@ Reference:
 Usage:
   opt = DifferentialEvolution(fitness_fn, dim, bounds)
   best_params, best_fitness, history = opt.optimise()
+
+  opt = DifferentialEvolution(fitness_fn, dim, bounds, minimise=True)
 """
 import numpy as np
 
@@ -24,6 +26,9 @@ class DifferentialEvolution(BaseOptimiser):
         Scale factor F used during mutation.
     crossover_rate : float
         Binomial crossover probability CR.
+    minimise : bool
+        If True, lower fitness values are treated as better. If False, higher
+        fitness values are treated as better.
     """
 
     def __init__(
@@ -36,18 +41,29 @@ class DifferentialEvolution(BaseOptimiser):
         seed=None,
         mutation_factor=0.8,
         crossover_rate=0.9,
+        minimise=False,
     ):
         super().__init__(fitness_fn, dim, bounds, pop_size, max_evals, seed)
         if pop_size < 4:
             raise ValueError("Differential Evolution requires pop_size >= 4.")
+        if not 0 < mutation_factor <= 2:
+            raise ValueError("mutation_factor must be in the range (0, 2].")
+        if not 0 <= crossover_rate <= 1:
+            raise ValueError("crossover_rate must be in the range [0, 1].")
         self.mutation_factor = mutation_factor
         self.crossover_rate = crossover_rate
+        self.minimise = minimise
+
+    def _is_better(self, candidate_fitness, current_fitness):
+        if self.minimise:
+            return candidate_fitness < current_fitness
+        return candidate_fitness > current_fitness
 
     def optimise(self):
         population = self._random_population()
         fitness = np.array([self._evaluate(ind) for ind in population])
 
-        best_idx = np.argmax(fitness)
+        best_idx = np.argmin(fitness) if self.minimise else np.argmax(fitness)
         best_params = population[best_idx].copy()
         best_fitness = fitness[best_idx]
         self.history.append((self.eval_count, best_fitness))
@@ -70,11 +86,11 @@ class DifferentialEvolution(BaseOptimiser):
                 trial = np.where(crossover_mask, mutant, population[i])
                 trial_fitness = self._evaluate(trial)
 
-                if trial_fitness > fitness[i]:
+                if self._is_better(trial_fitness, fitness[i]):
                     population[i] = trial
                     fitness[i] = trial_fitness
 
-                    if trial_fitness > best_fitness:
+                    if self._is_better(trial_fitness, best_fitness):
                         best_fitness = trial_fitness
                         best_params = trial.copy()
 
